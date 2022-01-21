@@ -51,7 +51,7 @@ export type ServerCoreInitializedOptions = Required<
   'dbType' | 'apiSecret' | 'devServer' | 'telemetry' | 'dashboardAppPath' | 'dashboardAppPort' |
   'driverFactory' | 'dialectFactory' |
   'externalDriverFactory' | 'externalDialectFactory' |
-  'scheduledRefreshContexts'
+  'scheduledRefreshContexts' | 'disableBasePath'
 >;
 
 function wrapToFnIfNeeded<T, R>(possibleFn: T | ((a: R) => T)): (a: R) => T {
@@ -424,7 +424,9 @@ export class CubejsServerCore {
         jwkUrl: getEnv('jwkUrl'),
         claimsNamespace: getEnv('jwtClaimsNamespace'),
         ...opts.jwt,
-      }
+      },
+
+      disableBasePath: opts.disableBasePath || false,
     };
 
     if (opts.contextToAppId && !opts.scheduledRefreshContexts) {
@@ -539,7 +541,7 @@ export class CubejsServerCore {
 
     if (this.options.devServer) {
       this.devServer.initDevEnv(app, this.options);
-    } else {
+    } else if (!this.options.disableBasePath) {
       app.get('/', (req, res) => {
         res.status(200)
           .send('<html><body>Cube.js server is running in production mode. <a href="https://cube.dev/docs/deployment/production-checklist">Learn more about production mode</a>.</body></html>');
