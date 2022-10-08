@@ -147,6 +147,8 @@ const schemaOptions = Joi.object().keys({
   // Additional system flags
   serverless: Joi.boolean(),
   allowNodeRequire: Joi.boolean(),
+
+  disableBasePath: Joi.boolean(),
 });
 
 export default (options: any) => {

@@ -203,6 +203,8 @@ export interface CreateOptions {
   // Internal flag, that we use to detect serverless env
   serverless?: boolean;
   allowNodeRequire?: boolean;
+
+  disableBasePath?: boolean;
 }
 
 export interface DriverDecoratedOptions extends CreateOptions {
@@ -212,6 +214,9 @@ export interface DriverDecoratedOptions extends CreateOptions {
 
 export type ServerCoreInitializedOptions = Required<
   DriverDecoratedOptions,
+
+  'disableBasePath' |
+
   'dbType' |
   'apiSecret' |
   'devServer' |
