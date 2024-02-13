@@ -411,7 +411,7 @@ export class CubejsServerCore {
 
     if (this.options.devServer) {
       this.devServer.initDevEnv(app, this.options);
-    } else {
+    } else if (!this.options.disableBasePath) {
       app.get('/', (req, res) => {
         res.status(200)
           .send('<html><body>Cube.js server is running in production mode. <a href="https://cube.dev/docs/deployment/production-checklist">Learn more about production mode</a>.</body></html>');

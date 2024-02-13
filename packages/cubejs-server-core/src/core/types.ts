@@ -215,6 +215,8 @@ export interface CreateOptions {
   serverless?: boolean;
   allowNodeRequire?: boolean;
   semanticLayerSync?: () => Promise<BiToolSyncConfig[]> | BiToolSyncConfig[];
+
+  disableBasePath?: boolean;
 }
 
 export interface DriverDecoratedOptions extends CreateOptions {

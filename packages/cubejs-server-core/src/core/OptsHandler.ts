@@ -473,6 +473,9 @@ export class OptsHandler {
       sqlCache: true,
       livePreview: getEnv('livePreview'),
       ...opts,
+
+      disableBasePath: opts.disableBasePath || false,
+
       jwt: {
         key: getEnv('jwtKey'),
         algorithms: getEnv('jwtAlgorithms'),
